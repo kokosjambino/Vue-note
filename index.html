@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://unpkg.com/vue"></script>
+    </head>
+    <body>
+        <div id="app">
+            <h1>{{title}}</h1>
+            <form action="" @submit.prevent="onSubmit">
+                <input
+                    type="text"
+                    :placeholder="input.placeholder"
+                    v-model="input.value"
+                />
+                <button v-if="input.value.length">{{button.text}}</button>
+            </form>
+
+            <ul v-for="(item, index) in notes" :key="index" :item="item">
+                <li>
+                    <span @click="edit(item)" v-show="item !== editInput"
+                        >{{item}}</span
+                    >
+                    <input
+                        v-show="inEditItem && item === editInput"
+                        type="text"
+                        v-model="editText"
+                        @keyup.enter="saved(index)"
+                    />
+                    <span @click="remove(index)"> &#10005; </span>
+                </li>
+            </ul>
+        </div>
+        <script src="./app.js"></script>
+    </body>
+</html>

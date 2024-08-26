@@ -9,25 +9,25 @@
     </head>
     <body>
         <div id="app">
-            <h1>{{title}}</h1>
+            <h1>Notes</h1>
             <form action="" @submit.prevent="onSubmit">
                 <input
                     type="text"
-                    :placeholder="input.placeholder"
+                    placeholder="Type your note"
                     v-model="input.value"
                 />
-                <button v-if="input.value.length">{{button.text}}</button>
+                <button v-if="input.value.length">Add note</button>
             </form>
 
             <ul v-for="(item, index) in notes" :key="index" :item="item">
                 <li>
-                    <span @click="edit(item)" v-show="item !== editInput"
+                    <span @click="edit(item)" v-show="item !== editInput.editInput"
                         >{{item}}</span
                     >
                     <input
-                        v-show="inEditItem && item === editInput"
+                        v-show="editInput.inEditItem && item === editInput.editInput"
                         type="text"
-                        v-model="editText"
+                        v-model.trim="editInput.editText"
                         @keyup.enter="saved(index)"
                     />
                     <span @click="remove(index)"> &#10005; </span>
